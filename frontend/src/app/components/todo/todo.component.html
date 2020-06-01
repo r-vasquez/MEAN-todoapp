@@ -3,15 +3,38 @@
     <div class="col s12">
       <div class="card">
         <div class="card-content">
+          <span class="card-title">Add a To-Do</span>
           <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
             <div class="row">
-              <div class="input-field col s12">
+              <div class="input-field col s6">
                 <input
                   type="text"
                   name="todo"
                   #name="ngModel"
                   [(ngModel)]="todoService.selectedTodo.todo"
-                  placeholder="Actividad a realizar"
+                  placeholder="Task"
+                />
+              </div>
+              <div class="input-field col s2">
+                <select
+                  type="text"
+                  name="priority"
+                  #name="ngModel"
+                  [(ngModel)]="todoService.selectedTodo.priority"
+                >
+                  <option value="" disabled selected>Priority</option>
+                  <option value="Alta">Alta</option>
+                  <option value="Media">Media</option>
+                  <option value="Baja">Baja</option>
+                </select>
+              </div>
+              <div class="input-field col s4">
+                <input
+                  type="date"
+                  name="dueDate"
+                  #name="ngModel"
+                  [(ngModel)]="todoService.selectedTodo.date"
+                  placeholder="Due Date"
                 />
               </div>
               <div class="card-action">
@@ -25,6 +48,25 @@
           </form>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col s12">
+      <table>
+        <thead>
+          <th>Task</th>
+          <th>Priority</th>
+          <th>Due Date</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let todo of todoService.todo">
+            <td>{{ todo.todo }}</td>
+            <td>{{ todo.priority }}</td>
+            <td>{{ todo.dueDate }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

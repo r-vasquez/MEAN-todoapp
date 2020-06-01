@@ -9,7 +9,6 @@ router.get('/', async (req, res) => {
   try {
     // Using mongoose find to get all the todos
     const queryResult = await ToDos.find({})
-    console.log('try')
     res.json(queryResult)
   } catch (error) {
     res.status(500)
@@ -21,9 +20,11 @@ router.get('/', async (req, res) => {
 // Creating a new To-Do
 router.post('/', function (req, res) {
   try {
-    console.log(req.body)
     ToDos.insertMany(req.body)
-    console.log('To-Do Posted')
+    res.json({
+      message: 'ToDo Saved',
+      data: req.body
+    })
   } catch (error) {
     console.log('estoy en catch')
     console.error(error)
