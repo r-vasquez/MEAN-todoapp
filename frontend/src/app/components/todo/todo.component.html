@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col s12">
+      <div class="card">
+        <div class="card-content">
+          <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
+            <div class="row">
+              <div class="input-field col s12">
+                <input
+                  type="text"
+                  name="todo"
+                  #name="ngModel"
+                  [(ngModel)]="todoService.selectedTodo.todo"
+                  placeholder="Actividad a realizar"
+                />
+              </div>
+              <div class="card-action">
+                <div class="pinput-field col s12">
+                  <button class="btn right">
+                    Save
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
