@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
     res.json(queryResult)
   } catch (error) {
     res.status(500)
+    console.log('el error es en el index')
     console.error(error)
   }
 })
@@ -20,14 +21,13 @@ router.get('/', async (req, res) => {
 // Creating a new To-Do
 router.post('/', function (req, res) {
   try {
-    ToDos.insertMany({
-      todo: 'Here comes the ToDo from the front-end'
-    })
+    console.log(req.body)
+    ToDos.insertMany(req.body)
     console.log('To-Do Posted')
   } catch (error) {
+    console.log('estoy en catch')
     console.error(error)
   }
-  res.redirect('/')
 })
 
 // Deleting a To-Do
