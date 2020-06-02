@@ -31,6 +31,19 @@ router.post('/', function (req, res) {
   }
 })
 
+router.put('/:todo_id', async (req, res) => {
+  const { todo_id } = req.params
+  const updatedTodo = {
+    todo: req.body.todo,
+    priority: req.body.priority,
+    dueDate: req.body.dueDate
+  }
+  await ToDos.findByIdAndUpdate(todo_id, { $set: updatedTodo }, { new: true })
+  res.json({
+    message: 'ToDo Updated'
+  })
+})
+
 // Deleting a To-Do
 router.delete('/:todo_id', (req, res) => {
   try {
@@ -43,9 +56,13 @@ router.delete('/:todo_id', (req, res) => {
         console.error(err)
       }
     )
-    res.json({ message: 'Movie Deleted' })
+    res.json({
+      message: 'Movie Deleted'
+    })
   } catch (error) {
-    console.log('Me pase al catch')
+    res.json({
+      message: 'Failed to delete movie'
+    })
     console.error(error)
   }
 })
