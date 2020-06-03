@@ -5,12 +5,18 @@
         <div class="card-content">
           <span class="card-title">Add a To-Do</span>
           <form #todoForm="ngForm" (ngSubmit)="addTodo(todoForm)">
+            <input
+              type="hidden"
+              name="_id"
+              #_id="ngModel"
+              [(ngModel)]="todoService.selectedTodo._id"
+            />
             <div class="row">
               <div class="input-field col s6">
                 <input
                   type="text"
                   name="todo"
-                  #name="ngModel"
+                  #todo="ngModel"
                   [(ngModel)]="todoService.selectedTodo.todo"
                   placeholder="Task"
                 />
@@ -18,9 +24,11 @@
               <div class="input-field col s2">
                 <select
                   type="text"
+                  id="selector"
                   name="priority"
-                  #name="ngModel"
+                  #priority="ngModel"
                   [(ngModel)]="todoService.selectedTodo.priority"
+                  class="browser-default"
                 >
                   <option value="" disabled selected>Priority</option>
                   <option value="Alta">Alta</option>
@@ -32,9 +40,11 @@
                 <input
                   type="date"
                   name="dueDate"
-                  #name="ngModel"
-                  [(ngModel)]="todoService.selectedTodo.date"
-                  placeholder="Due Date"
+                  #dueDate="ngModel"
+                  [ngModel]="
+                    todoService.selectedTodo.dueDate | date: 'yyyy-MM-dd'
+                  "
+                  (ngModel)="todoService.selectedTodo.dueDate = $event"
                 />
               </div>
               <div class="card-action">
@@ -63,7 +73,15 @@
           <tr *ngFor="let todo of todoService.todo">
             <td>{{ todo.todo }}</td>
             <td>{{ todo.priority }}</td>
-            <td>{{ todo.dueDate }}</td>
+            <td>{{ formattedDate(todo.dueDate) }}</td>
+            <td>
+              <a (click)="editTodo(todo)">
+                <i class="material-icons">edit</i>
+              </a>
+              <a (click)="deleteTodo(todo._id)">
+                <i class="material-icons">delete</i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

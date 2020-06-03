@@ -24,7 +24,10 @@ export class TodoService {
     return this.http.post(this.URL_API, todo);
   }
 
-  deleteTodos(_id: string) {
+  putTodo(todo: Todo) {
+    return this.http.put(this.URL_API + `/${todo._id}`, todo);
+  }
+  deleteTodos(_id: String) {
     return this.http.delete(this.URL_API + `/${_id}`);
   }
 }

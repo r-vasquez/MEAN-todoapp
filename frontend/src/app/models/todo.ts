@@ -1,12 +1,11 @@
 export class Todo {
-  constructor(_id = '', todo = '', priority = '', date = new Date()) {
-    this._id = _id;
+  constructor(todo = '', priority = '', date = new Date()) {
     this.todo = todo;
     this.priority = priority;
-    this.date = date;
+    this.dueDate = date;
   }
   _id: string;
   todo: string;
   priority: string;
-  date: Date;
+  dueDate: Date;
 }
