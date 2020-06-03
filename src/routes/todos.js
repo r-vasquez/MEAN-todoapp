@@ -12,7 +12,6 @@ router.get('/', async (req, res) => {
     res.json(queryResult)
   } catch (error) {
     res.status(500)
-    console.log('el error es en el index')
     console.error(error)
   }
 })
@@ -26,11 +25,14 @@ router.post('/', function (req, res) {
       data: req.body
     })
   } catch (error) {
-    console.log('estoy en catch')
+    res.json({
+      message: 'Failed to Create ToDo'
+    })
     console.error(error)
   }
 })
 
+// Updating a ToDo
 router.put('/:todo_id', async (req, res) => {
   const { todo_id } = req.params
   const updatedTodo = {
@@ -52,16 +54,15 @@ router.delete('/:todo_id', (req, res) => {
         _id: req.params.todo_id
       },
       function (err) {
-        console.log('no hice delete')
         console.error(err)
       }
     )
     res.json({
-      message: 'Movie Deleted'
+      message: 'ToDo Deleted'
     })
   } catch (error) {
     res.json({
-      message: 'Failed to delete movie'
+      message: 'Failed to delete ToDo'
     })
     console.error(error)
   }
